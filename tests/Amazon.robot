@@ -1,23 +1,20 @@
 *** Settings ***
 Documentation  Basic example suite
 Library  SeleniumLibrary
-
+Resource  ../resources/Common.robot
 
 *** Test Cases ***
 User must sign in to check out
     [Tags]  Smoke
-    Begin Web Test
+    Common.Begin Web Test
     Search for Products
     Select Product from Search Results
     Add Product to Cart
     Begin Checkout
     Sleep  3s
-    End Web Test
+    Common.End Web Test
 
 *** Keywords ***
-Begin Web Test
-    Open Browser  about:blank
-
 Search for Products
     Go To  http://www.amazon.com
     Wait Until Page Contains  Your Amazon.com
@@ -37,6 +34,3 @@ Begin Checkout
     Click Link  Proceed to checkout (1 item)
     # Page Should Contain Element  ap_signin1a_pagelet_title
     # Element Text Should Be  ap_signin1a_pagelet_title  SIgn In
-
-End Web Test
-    Close Browser
