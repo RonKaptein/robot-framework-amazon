@@ -6,6 +6,9 @@ Resource  ../resources/po/LandingPage.robot
 Test Setup  Begin Web Test
 Test Teardown  End Web Test
 
+*** Variables ***
+${SEARCH_TERM} =  Ferrari 458
+
 *** Test Cases ***
 User must sign in to check out
     [Tags]  Smoke
@@ -20,9 +23,9 @@ Search for Products
     LandingPage.Load
     LandingPage.Verify Page Loaded
     # Wait Until Page Contains  Your Amazon.com
-    Input Text  id=twotabsearchtextbox  Ferrari 458
+    Input Text  id=twotabsearchtextbox  ${SEARCH_TERM}
     Click Button  xpath=//*[@id="nav-search"]/form/div[2]/div/input
-    Wait Until Page Contains  results for "Ferrari 458"
+    Wait Until Page Contains  results for "${SEARCH_TERM}"
 
 Select Product from Search Results
     Click Link  css=#result_0 a.s-access-detail-page
