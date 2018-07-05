@@ -2,6 +2,7 @@
 Documentation  Basic example suite
 Library  SeleniumLibrary
 Resource  ../resources/Common.robot
+Resource  ../resources/po/LandingPage.robot
 Test Setup  Begin Web Test
 Test Teardown  End Web Test
 
@@ -16,8 +17,9 @@ User must sign in to check out
 
 *** Keywords ***
 Search for Products
-    Go To  http://www.amazon.com
-    Wait Until Page Contains  Your Amazon.com
+    LandingPage.Load
+    LandingPage.Verify Page Loaded
+    # Wait Until Page Contains  Your Amazon.com
     Input Text  id=twotabsearchtextbox  Ferrari 458
     Click Button  xpath=//*[@id="nav-search"]/form/div[2]/div/input
     Wait Until Page Contains  results for "Ferrari 458"
