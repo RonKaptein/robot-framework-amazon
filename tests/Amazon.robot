@@ -2,17 +2,17 @@
 Documentation  Basic example suite
 Library  SeleniumLibrary
 Resource  ../resources/Common.robot
+Test Setup  Begin Web Test
+Test Teardown  End Web Test
 
 *** Test Cases ***
 User must sign in to check out
     [Tags]  Smoke
-    Common.Begin Web Test
     Search for Products
     Select Product from Search Results
     Add Product to Cart
     Begin Checkout
     Sleep  3s
-    Common.End Web Test
 
 *** Keywords ***
 Search for Products
