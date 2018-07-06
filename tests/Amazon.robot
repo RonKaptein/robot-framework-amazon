@@ -9,15 +9,21 @@ Test Teardown  End Web Test
 
 *** Variables ***
 ${SEARCH_TERM} =  Lamborghini
+${LOGIN_EMAIL} =  joe@sixpac.com
+${LOGIN_PASSWORD} =  fake_password
 
 *** Test Cases ***
-User must sign in to check out
+Logged out user should be able to search for products
     [Tags]  Smoke
     Search for Products
     Select Product from Search Results
     Add Product to Cart
     Begin Checkout
     Sleep  3s
+
+Should be able to login
+    [Tags]  Smoke
+    Login  ${LOGIN_EMAIL}  ${LOGIN_PASSWORD}
 
 *** Keywords ***
 Search for Products
@@ -38,3 +44,20 @@ Begin Checkout
     Click Link  Proceed to checkout (1 item)
     # Page Should Contain Element  ap_signin1a_pagelet_title
     # Element Text Should Be  ap_signin1a_pagelet_title  SIgn In
+
+Login
+    [Arguments]  ${username}  ${password}
+    Fill "Email" Field  ${username}
+    Fill "Password" Field  ${password}
+    Click "Sign In" Button
+
+Fill "Email" Field
+    [Arguments]  ${username}
+    Log  Fill usename field with ${username}
+
+Fill "Password" Field
+    [Arguments]  ${password}
+    Log  Fill password field with ${password}
+
+Click "Sign In" Button
+    Log  Clicking submit button
