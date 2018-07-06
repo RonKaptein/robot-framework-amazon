@@ -3,11 +3,12 @@ Documentation  Basic example suite
 Library  SeleniumLibrary
 Resource  ../resources/Common.robot
 Resource  ../resources/po/LandingPage.robot
+Resource  ../resources/po/TopNav.robot
 Test Setup  Begin Web Test
 Test Teardown  End Web Test
 
 *** Variables ***
-${SEARCH_TERM} =  Ferrari 458
+${SEARCH_TERM} =  Lamborghini
 
 *** Test Cases ***
 User must sign in to check out
@@ -22,10 +23,8 @@ User must sign in to check out
 Search for Products
     LandingPage.Load
     LandingPage.Verify Page Loaded
-    # Wait Until Page Contains  Your Amazon.com
-    Input Text  id=twotabsearchtextbox  ${SEARCH_TERM}
-    Click Button  xpath=//*[@id="nav-search"]/form/div[2]/div/input
-    Wait Until Page Contains  results for "${SEARCH_TERM}"
+    TopNav.Search For Product
+    TopNav.Verify Search Results Loaded
 
 Select Product from Search Results
     Click Link  css=#result_0 a.s-access-detail-page
